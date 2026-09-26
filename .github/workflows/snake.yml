@@ -1,0 +1,35 @@
+name: Neon contribution snake
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 0 * * *'
+  push:
+    branches: [main]
+    paths: ['.github/workflows/snake.yml']
+permissions:
+  contents: write
+concurrency:
+  group: contribution-snake
+  cancel-in-progress: false
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate neon snake
+        uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: j0xcore
+          outputs: |
+            assets/contribution-snake.svg?color_snake=#FF2D95&color_dots=#161B22,#143D52,#126B80,#00ACBF,#00F0FF
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Save animation
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/contribution-snake.svg
+          git diff --cached --quiet && exit 0
+          git commit -m "Refresh neon contribution snake"
+          git push
