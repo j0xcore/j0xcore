@@ -15,8 +15,8 @@
 ### `01` // OPERATOR
 
 ```text
-┌─ j0xcore@github ──────────────────────────────┐
-│  NAME     Chainuwat Ruengsri                  │
+┌─ j0xcore@github ─────────────────────────────┐
+│  NAME     Chainuwat Ruengsri                 │
 │  ROLE     Full Stack Developer               │
 │  CORE     Rust + React                       │
 │  DATA     MySQL                              │
